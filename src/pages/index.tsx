@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       <Head>
         <title>КРП здорового человека</title>
         <meta name="description" content="Не называй патриотами кровопийц" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/trans_str.png" />
       </Head>
 
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#9d9ef9] to-[#ffffff]">
@@ -33,8 +33,20 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
+        <div ></div>
         <SpinnablePicker
-          options={["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]}
+          options={[
+            "Option 1",
+            "Option 2",
+            "Option 3",
+            "Option 4",
+            "Option 5",
+            "Option 6",
+            "Option 7",
+            "Option 8",
+            "Option 9",
+            "Option 10",
+          ]}
         />
       </main>
     </>
