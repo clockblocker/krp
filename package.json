@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.2.1",
+    "gsap": "^3.11.5",
     "next": "13.3.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "rn-scrollable-picker": "^0.1.12",
+    "swiper": "^9.2.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
