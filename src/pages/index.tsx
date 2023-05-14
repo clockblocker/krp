@@ -16,12 +16,12 @@ const Home: NextPage = () => {
 
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#9d9ef9] to-[#ffffff]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+          {/* <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Не называй{" "}
             <span className="text-[hsl(219,41%,42%)]">патриотами </span>
             <span className="text-[hsl(349,61%,50%)]">кровопийц </span>
-          </h1>
-          <div className="flex">
+          </h1> */}
+          {/* <div className="flex">
             <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-black/10 p-1 text-black hover:bg-black/20">
               <h3 className="text-2xl font-bold">Общество</h3>
             </div>
@@ -31,9 +31,9 @@ const Home: NextPage = () => {
             <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-black/10 p-1 text-black hover:bg-black/20">
               <h3 className="text-2xl font-bold">Кретинов</h3>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div ></div>
+        <div></div>
         <SpinnablePicker
           options={[
             "Option 1",
