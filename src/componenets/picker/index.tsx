@@ -2,10 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 
 interface SpinnablePickerProps {
   options: string[];
+  initialIndex?: number;
+  indexChanged: (n: number) => void;
 }
 
-const SpinnablePicker: React.FC<SpinnablePickerProps> = ({ options }) => {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
+  options,
+  initialIndex = 0,
+  indexChanged,
+}) => {
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
   const containerRef = useRef<HTMLDivElement>(null);
   const momentumRef = useRef<number>(0);
   const touchStartRef = useRef<number | null>(null);
@@ -17,6 +23,10 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({ options }) => {
       cancelAnimationFrame(animationFrameRef.current!);
     };
   }, []);
+
+  useEffect(() => {
+    indexChanged(selectedIndex);
+  }, [selectedIndex]);
 
   const changeSelectedIndexWithAnimation = (delta: number) => {
     setSelectedIndex((prevIndex) => {
@@ -90,7 +100,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({ options }) => {
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (touchStartRef.current !== null && e.touches) {
       const touchMove = e.touches[0]?.clientY || 0;
-      const delta = (touchMove - (touchMoveRef.current ?? 0)) / 10;
+      const delta = (touchMove - (touchMoveRef.current ?? 0)) / 15;
       console.log("touch delta", delta);
       touchMoveRef.current = touchMove;
       changeSelectedIndexWithAnimation(delta);
@@ -111,9 +121,6 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({ options }) => {
       const handleTransitionEnd = () => {
         if (selectedIndex === 0 || selectedIndex === options.length - 1) {
           containerElement.style.transition = "none";
-          // containerElement.style.transform = `translateY(-${
-          //   selectedIndex * 50
-          // }px)`;
           requestAnimationFrame(() => {
             containerElement.style.transition = "";
           });
@@ -135,7 +142,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({ options }) => {
     <div
       className="spinnable-picker"
       onWheel={handleWheel}
-      onTouchStart={handleTouchStart}
+      // onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       style={{ overflow: "hidden" }}
@@ -154,9 +161,12 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({ options }) => {
         {options.map((option, index) => (
           <div
             key={index}
-            onTouchEnd={() => handleItemClick(index)}
+            onTouchStart={(e) => {
+              handleItemClick(index);
+              handleTouchStart(e);
+            }}
             onClick={() => handleItemClick(index)}
-            className={`picker-option ${
+            className={`picker-option cursor-pointer select-none ${
               index === selectedIndex ? "selected" : ""
             }`}
           >
