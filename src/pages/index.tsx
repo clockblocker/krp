@@ -60,12 +60,12 @@ const three = [
 ];
 // bg-black/10 p-1 text-black hover:bg-black/20
 // bg-black/10 p-1 text-black hover:bg-black/20
-// bg-black/10 p-1 text-black hover:bg-black/20
-const Home: NextPage = () => {
-  // const oneRef = useRef<>(null);
-  // const twoRef = useRef<>(null);
-  // const threeRef = useRef<>(null);
 
+function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max);
+}
+
+const Home: NextPage = () => {
   const [initialOne, setInitialOne] = useState(2);
   const [selectedOne, setSelectedOne] = useState(one[initialOne]);
 
@@ -74,6 +74,13 @@ const Home: NextPage = () => {
 
   const [initialThree, setInitialThree] = useState(5);
   const [selectedThree, setSelectedThree] = useState(three[initialThree]);
+
+  const bound = (f: (n: number) => void, a: Array<any>) => {
+    return (n: number) => {
+      console.log("n > 0 && n < a.length", 0, n, a.length);
+      n >= 0 && n < a.length ? f(n) : null;
+    };
+  };
   // min-h-screen
   return (
     <>
@@ -101,12 +108,16 @@ const Home: NextPage = () => {
           <div className="flex flex-row justify-center">
             <button
               className="d-flex rounded border-2 border-black"
-              onClick={() => setInitialOne(initialOne + 1)}
+              onClick={() => {
+                bound(setInitialOne, one)(getRandomInt(one.length));
+                bound(setInitialTwo, two)(getRandomInt(two.length));
+                bound(setInitialThree, three)(getRandomInt(three.length));
+              }}
             >
               <img
-                className="w-7 rounded  bg-black/10 p-1 text-black visited:bg-black/40 hover:bg-black/20 active:bg-black/50"
-                src="/copy.png"
-                alt="Copy"
+                className="w-7 rounded  bg-black/0 p-1 text-black visited:bg-black/20 hover:bg-black/10 active:bg-black/20"
+                src="/rotate2.png"
+                alt="Наугад"
               />
             </button>
             <button
@@ -118,45 +129,31 @@ const Home: NextPage = () => {
               }
             >
               <img
-                className="w-7 rounded bg-black/10 p-1 text-black visited:bg-black/40 hover:bg-black/20 active:bg-black/50"
+                className="w-7 rounded bg-black/0 p-1 text-black visited:bg-black/40 hover:bg-black/20 active:bg-black/50"
                 src="/copy.png"
                 alt="Copy"
               />
             </button>
           </div>
-
-          {/* a:visited {
-  color: purple;
-}
-
-a:active {
-  color: blue;
-} */}
-
-          {/* <div className="btn btn_red">
-              <span className="icon"></span>
-              <img src={"../../public/copy.png"} alt="Скопировать"></img>
-              <span></span>
-            </div> */}
         </div>
         <br></br>
         <div className="flex">
           <SpinnablePicker
             options={one}
             initialIndex={initialOne}
-            setInitialIndex={(n: number) => setInitialOne(n)}
+            setInitialIndex={(n: number) => bound(setInitialOne, one)(n)}
             indexChanged={(n) => setSelectedOne(one[n])}
           />
           <SpinnablePicker
             options={two}
             initialIndex={initialTwo}
-            setInitialIndex={(n: number) => setInitialTwo(n)}
+            setInitialIndex={(n: number) => bound(setInitialTwo, one)(n)}
             indexChanged={(n) => setSelectedTwo(two[n])}
           />
           <SpinnablePicker
             options={three}
             initialIndex={initialThree}
-            setInitialIndex={(n: number) => setInitialThree(n)}
+            setInitialIndex={(n: number) => bound(setInitialThree, one)(n)}
             indexChanged={(n) => setSelectedThree(three[n])}
           />
         </div>
@@ -166,6 +163,3 @@ a:active {
 };
 
 export default Home;
-function useRef(arg0: number) {
-  throw new Error("Function not implemented.");
-}
