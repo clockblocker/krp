@@ -91,16 +91,20 @@ const Home: NextPage = () => {
       <Head>
         <title>КРП здорового человека</title>
         <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@clockblocker_" />
         <meta name="twitter:title" content="Не называй патриотами кровопийц" />
         <meta
           name="twitter:description"
-          content="Не называй патриотами кровопийц"
+          content="Лига взволнованных лоботрясов? Кучка мамкиных геостратегов? Собери название по вкусу!"
+        />
+        <meta
+          name="twitter:image"
+          content="https://drive.google.com/file/d/1g69KATv4OJjnxff73TGzhI6-WXZosq-a/view?usp=share_link"
         />
         <meta
           name="description"
           content="Лига взволнованных лоботрясов? Кучка мамкиных геостратегов? Собери название по вкусу!"
         />
-        <meta name="twitter:image" content="/spin.png" />
         <link rel="icon" href="/trans_str.png" />
       </Head>
 
