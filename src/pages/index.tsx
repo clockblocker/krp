@@ -69,14 +69,28 @@ function getRandomInt(max: number, toAvoid?: number) {
   }
 }
 
+const suggestionPairs = [
+  ["Вы хотели сказать", "?"],
+  ["Возможно вы имели в виду", "."],
+  ["Только:", "."],
+  ["Может лучше", "?"],
+];
+
+const makeSuggestion = (one: string, two: string, three: string) => {
+  const n = getRandomInt(suggestionPairs.length);
+  return `${(suggestionPairs[n] ?? [""])[0]} ${one} ${two} ${three}${
+    (suggestionPairs[n] ?? [""])[1]
+  }`;
+};
+
 const Home: NextPage = () => {
   const [initialOne, setInitialOne] = useState(2);
   const [selectedOne, setSelectedOne] = useState(one[initialOne] || "");
 
-  const [initialTwo, setInitialTwo] = useState(4);
+  const [initialTwo, setInitialTwo] = useState(5);
   const [selectedTwo, setSelectedTwo] = useState(two[initialTwo] || "");
 
-  const [initialThree, setInitialThree] = useState(5);
+  const [initialThree, setInitialThree] = useState(6);
   const [selectedThree, setSelectedThree] = useState(three[initialThree] || "");
 
   const bound = (f: (n: number) => void, a: Array<any>) => {
@@ -121,8 +135,8 @@ const Home: NextPage = () => {
           </h1>
         </div>
         <div className="flex flex-col">
-          <h3 className="text-center text-2xl font-bold">{`${selectedOne}`}</h3>
-          <h3 className="text-center text-2xl font-bold">{`${selectedTwo} ${selectedThree}`}</h3>
+          <h3 className="text-center text-3xl font-bold">{`${one[initialOne]}`}</h3>
+          <h3 className="text-center text-3xl font-bold">{`${two[initialTwo]} ${selectedThree}`}</h3>
         </div>
         <br></br>
         <div className="flex">
@@ -130,20 +144,20 @@ const Home: NextPage = () => {
             options={one}
             initialIndex={initialOne}
             setInitialIndex={(n: number) => bound(setInitialOne, one)(n)}
-            indexChanged={(n) => setSelectedOne(one[n] ?? "")}
+            // indexChanged={(n) => setSelectedOne(one[n] ?? "")}
             size={"small"}
           />
           <SpinnablePicker
             options={two}
             initialIndex={initialTwo}
-            setInitialIndex={(n: number) => bound(setInitialTwo, one)(n)}
-            indexChanged={(n) => setSelectedTwo(two[n] ?? "")}
+            setInitialIndex={(n: number) => bound(setInitialTwo, two)(n)}
+            // indexChanged={(n) => setSelectedTwo(two[n] ?? "")}
           />
           <SpinnablePicker
             options={three}
             initialIndex={initialThree}
-            setInitialIndex={(n: number) => bound(setInitialThree, one)(n)}
-            indexChanged={(n) => setSelectedThree(three[n] ?? "")}
+            setInitialIndex={(n: number) => bound(setInitialThree, three)(n)}
+            // indexChanged={(n) => setSelectedThree(three[n] ?? "")}
             size={"medium"}
           />
         </div>
@@ -176,7 +190,11 @@ const Home: NextPage = () => {
         </div>
         <a
           className="twitter-share-button"
-          href="https://twitter.com/intent/tweet?url=https://krp.vercel.app/"
+          href={`https://twitter.com/intent/tweet?url=https://krp.vercel.app/&text=${makeSuggestion(
+            one[initialOne] ?? "",
+            two[initialTwo] ?? "",
+            three[initialThree] ?? ""
+          )}`}
           data-size="large"
         >
           Tweet

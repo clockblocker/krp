@@ -4,7 +4,7 @@ interface SpinnablePickerProps {
   options: string[];
   initialIndex: number;
   setInitialIndex: (n: number) => void;
-  indexChanged: (n: number) => void;
+  // indexChanged: (n: number) => void;
   size?: "small" | "medium" | "large";
 }
 
@@ -12,7 +12,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
   options,
   initialIndex,
   setInitialIndex,
-  indexChanged,
+  // indexChanged,
   size = "large",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,13 +27,9 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
     };
   }, []);
 
-  useEffect(() => {
-    indexChanged(initialIndex);
-  }, [initialIndex, indexChanged]);
-
   // useEffect(() => {
-  //   onRefChanged(containerRef);
-  // }, [containerRef]);
+  //   indexChanged(initialIndex);
+  // }, [initialIndex, indexChanged]);
 
   const changeSelectedIndexWithAnimation = (delta: number) => {
     const newIndex = initialIndex - delta;
