@@ -78,9 +78,9 @@ const suggestionPairs = [
 
 const makeSuggestion = (one: string, two: string, three: string) => {
   const n = getRandomInt(suggestionPairs.length);
-  return `${(suggestionPairs[n] ?? [""])[0]} ${one} ${two} ${three}${
-    (suggestionPairs[n] ?? [""])[1]
-  }`;
+  const a = (suggestionPairs[n] ?? [""])[0] ?? "";
+  const b = (suggestionPairs[n] ?? [""])[1] ?? "";
+  return `${a} ${one} ${two} ${three}${b}`;
 };
 
 const Home: NextPage = () => {
@@ -111,10 +111,7 @@ const Home: NextPage = () => {
           name="twitter:description"
           content="Лига взволнованных лоботрясов? Кучка мамкиных геостратегов? Собери название по вкусу!"
         />
-        <meta
-          name="twitter:image"
-          content="https://drive.google.com/file/d/1g69KATv4OJjnxff73TGzhI6-WXZosq-a/view"
-        />
+        <meta name="twitter:image" content="https://i.imgur.com/fx6wKMC.png" />
         <meta
           name="description"
           content="Лига взволнованных лоботрясов? Кучка мамкиных геостратегов? Собери название по вкусу!"
@@ -135,8 +132,12 @@ const Home: NextPage = () => {
           </h1>
         </div>
         <div className="flex flex-col">
-          <h3 className="text-center text-3xl font-bold">{`${one[initialOne]}`}</h3>
-          <h3 className="text-center text-3xl font-bold">{`${two[initialTwo]} ${selectedThree}`}</h3>
+          <h3 className="text-center text-3xl font-bold">{`${
+            one[initialOne] ?? ""
+          }`}</h3>
+          <h3 className="text-center text-3xl font-bold">{`${
+            two[initialTwo] ?? ""
+          } ${three[initialThree] ?? ""}`}</h3>
         </div>
         <br></br>
         <div className="flex">
