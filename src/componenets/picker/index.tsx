@@ -5,6 +5,7 @@ interface SpinnablePickerProps {
   initialIndex: number;
   setInitialIndex: (n: number) => void;
   indexChanged: (n: number) => void;
+  size?: "small" | "medium" | "large";
   // onRefChanged?: (containerRef: React.RefObject<HTMLDivElement>) => void;
   // onRefChanged: (containerRef: React.RefObject<HTMLDivElement>) => void;
 }
@@ -14,6 +15,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
   initialIndex,
   setInitialIndex,
   indexChanged,
+  size = "large",
   // onRefChanged = (a: any) => null,
 }) => {
   // const [selectedIndex, setInitialIndex] = useState(initialIndex);
@@ -148,7 +150,11 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
 
   return (
     <div
-      className="spinnable-picker"
+      className={
+        "spinnable-picker " +
+        (size == "small" ? "small-picker " : "") +
+        (size == "medium" ? "medium-picker " : "")
+      }
       onWheel={handleWheel}
       // onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}

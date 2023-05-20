@@ -2,12 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 .spinnable-picker {
-  width: 130px;
+  width: 125px;
   height: 200px;
   overflow: hidden;
   /* border: 1px solid #ccc; */
   border-radius: 4px;
   position: relative;
+}
+
+.medium-picker {
+  width: 122px !important;
+  margin-left: 5px;
+}
+
+.small-picker {
+  width: 94px !important;
+  margin-right: 5px;
 }
 
 .picker-option {

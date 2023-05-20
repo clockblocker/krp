@@ -57,12 +57,18 @@ const three = [
   "реваншистов",
   "милитаристов",
   "неудачников",
+  "упырей ",
 ];
 // bg-black/10 p-1 text-black hover:bg-black/20
 // bg-black/10 p-1 text-black hover:bg-black/20
 
-function getRandomInt(max: number) {
-  return Math.floor(Math.random() * max);
+function getRandomInt(max: number, toAvoid?: number) {
+  while (true) {
+    const res = Math.floor(Math.random() * max);
+    if (res !== toAvoid) {
+      return res;
+    }
+  }
 }
 
 const Home: NextPage = () => {
@@ -86,7 +92,17 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>КРП здорового человека</title>
-        <meta name="description" content="Не называй патриотами кровопийц" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Не называй патриотами кровопийц" />
+        <meta
+          name="twitter:description"
+          content="Не называй патриотами кровопийц"
+        />
+        <meta
+          name="description"
+          content="Лига взволнованных лоботрясов? Кучка мамкиных геостратегов? Собери название по вкусу!"
+        />
+        <meta name="twitter:image" content="/spin.png" />
         <link rel="icon" href="/trans_str.png" />
       </Head>
 
@@ -105,36 +121,6 @@ const Home: NextPage = () => {
         <div className="flex flex-col">
           <h3 className="text-center text-2xl font-bold">{`${selectedOne}`}</h3>
           <h3 className="text-center text-2xl font-bold">{`${selectedTwo} ${selectedThree}`}</h3>
-          <div className="flex flex-row justify-center">
-            <button
-              className="d-flex rounded border-2 border-black"
-              onClick={() => {
-                bound(setInitialOne, one)(getRandomInt(one.length));
-                bound(setInitialTwo, two)(getRandomInt(two.length));
-                bound(setInitialThree, three)(getRandomInt(three.length));
-              }}
-            >
-              <img
-                className="w-7 rounded  bg-black/0 p-1 text-black visited:bg-black/20 hover:bg-black/10 active:bg-black/20"
-                src="/rotate2.png"
-                alt="Наугад"
-              />
-            </button>
-            <button
-              className="d-flex ml-5 rounded border-2 border-black"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  `${selectedOne} ${selectedTwo} ${selectedThree}`
-                )
-              }
-            >
-              <img
-                className="w-7 rounded bg-black/0 p-1 text-black visited:bg-black/40 hover:bg-black/20 active:bg-black/50"
-                src="/copy.png"
-                alt="Copy"
-              />
-            </button>
-          </div>
         </div>
         <br></br>
         <div className="flex">
@@ -143,6 +129,7 @@ const Home: NextPage = () => {
             initialIndex={initialOne}
             setInitialIndex={(n: number) => bound(setInitialOne, one)(n)}
             indexChanged={(n) => setSelectedOne(one[n])}
+            size={"small"}
           />
           <SpinnablePicker
             options={two}
@@ -155,8 +142,49 @@ const Home: NextPage = () => {
             initialIndex={initialThree}
             setInitialIndex={(n: number) => bound(setInitialThree, one)(n)}
             indexChanged={(n) => setSelectedThree(three[n])}
+            size={"medium"}
           />
         </div>
+        <div className="flex flex-row justify-center">
+          <button
+            className="d-flex  select-none rounded border-2 border-black"
+            onClick={() => {
+              bound(setInitialOne, one)(getRandomInt(one.length, initialOne));
+              bound(setInitialTwo, two)(getRandomInt(two.length, initialTwo));
+              bound(
+                setInitialThree,
+                three
+              )(getRandomInt(three.length, initialThree));
+            }}
+          >
+            <img
+              className="w-20  select-none rounded  bg-black/0 p-1 text-black visited:bg-[hsl(219,41%,42%)]/20 hover:bg-[hsl(219,41%,42%)]/10 active:bg-[hsl(219,41%,42%)]/20"
+              src="/rotate2.png"
+              alt="Наугад"
+            />
+          </button>
+          <button
+            className=" d-flex ml-5 select-none rounded border-2 border-black"
+            onClick={() =>
+              navigator.clipboard.writeText(
+                `${selectedOne} ${selectedTwo} ${selectedThree}`
+              )
+            }
+          >
+            <img
+              className="w-20 select-none  rounded bg-[hsl(219,41%,42%)]/0 p-1 text-black visited:bg-[hsl(219,41%,42%)]/40 hover:bg-[hsl(219,41%,42%)]/20 active:bg-[hsl(219,41%,42%)]/50"
+              src="/copy.png"
+              alt="Copy"
+            />
+          </button>
+        </div>
+        <a
+          className="twitter-share-button"
+          href="https://twitter.com/intent/tweet?url=https://krp.vercel.app/"
+          data-size="large"
+        >
+          Tweet
+        </a>
       </main>
     </>
   );
