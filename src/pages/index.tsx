@@ -1,6 +1,7 @@
 "use client";
 
 import { type NextPage } from "next";
+import Image from "next/image";
 import Head from "next/head";
 import { useState } from "react";
 import SpinnablePicker from "~/componenets/picker";
@@ -70,13 +71,13 @@ function getRandomInt(max: number, toAvoid?: number) {
 
 const Home: NextPage = () => {
   const [initialOne, setInitialOne] = useState(2);
-  const [selectedOne, setSelectedOne] = useState(one[initialOne]);
+  const [selectedOne, setSelectedOne] = useState(one[initialOne] || "");
 
   const [initialTwo, setInitialTwo] = useState(4);
-  const [selectedTwo, setSelectedTwo] = useState(two[initialTwo]);
+  const [selectedTwo, setSelectedTwo] = useState(two[initialTwo] || "");
 
   const [initialThree, setInitialThree] = useState(5);
-  const [selectedThree, setSelectedThree] = useState(three[initialThree]);
+  const [selectedThree, setSelectedThree] = useState(three[initialThree] || "");
 
   const bound = (f: (n: number) => void, a: Array<any>) => {
     return (n: number) => {
@@ -125,26 +126,26 @@ const Home: NextPage = () => {
             options={one}
             initialIndex={initialOne}
             setInitialIndex={(n: number) => bound(setInitialOne, one)(n)}
-            indexChanged={(n) => setSelectedOne(one[n])}
+            indexChanged={(n) => setSelectedOne(one[n] ?? "")}
             size={"small"}
           />
           <SpinnablePicker
             options={two}
             initialIndex={initialTwo}
             setInitialIndex={(n: number) => bound(setInitialTwo, one)(n)}
-            indexChanged={(n) => setSelectedTwo(two[n])}
+            indexChanged={(n) => setSelectedTwo(two[n] ?? "")}
           />
           <SpinnablePicker
             options={three}
             initialIndex={initialThree}
             setInitialIndex={(n: number) => bound(setInitialThree, one)(n)}
-            indexChanged={(n) => setSelectedThree(three[n])}
+            indexChanged={(n) => setSelectedThree(three[n] ?? "")}
             size={"medium"}
           />
         </div>
         <div className="flex flex-row justify-center">
           <button
-            className="d-flex  select-none rounded border-2 border-black"
+            className=" d-flex ml-5 w-20 select-none rounded border-2  border-black bg-[hsl(219,41%,42%)]/0 p-1 text-black visited:bg-[hsl(219,41%,42%)]/40 hover:bg-[hsl(219,41%,42%)]/20 active:bg-[hsl(219,41%,42%)]/50"
             onClick={() => {
               bound(setInitialOne, one)(getRandomInt(one.length, initialOne));
               bound(setInitialTwo, two)(getRandomInt(two.length, initialTwo));
@@ -154,25 +155,19 @@ const Home: NextPage = () => {
               )(getRandomInt(three.length, initialThree));
             }}
           >
-            <img
-              className="w-20  select-none rounded  bg-black/0 p-1 text-black visited:bg-[hsl(219,41%,42%)]/20 hover:bg-[hsl(219,41%,42%)]/10 active:bg-[hsl(219,41%,42%)]/20"
-              src="/rotate2.png"
-              alt="Наугад"
-            />
+            <Image width={500} height={500} src="/rotate2.png" alt="Наугад" />
           </button>
           <button
-            className=" d-flex ml-5 select-none rounded border-2 border-black"
-            onClick={() =>
-              navigator.clipboard.writeText(
-                `${selectedOne} ${selectedTwo} ${selectedThree}`
-              )
-            }
+            className=" d-flex ml-5 w-20 select-none rounded border-2  border-black bg-[hsl(219,41%,42%)]/0 p-1 text-black visited:bg-[hsl(219,41%,42%)]/40 hover:bg-[hsl(219,41%,42%)]/20 active:bg-[hsl(219,41%,42%)]/50"
+            onClick={() => {
+              void (async () => {
+                await navigator.clipboard.writeText(
+                  `${selectedOne} ${selectedTwo} ${selectedThree}`
+                );
+              })();
+            }}
           >
-            <img
-              className="w-20 select-none  rounded bg-[hsl(219,41%,42%)]/0 p-1 text-black visited:bg-[hsl(219,41%,42%)]/40 hover:bg-[hsl(219,41%,42%)]/20 active:bg-[hsl(219,41%,42%)]/50"
-              src="/copy.png"
-              alt="Copy"
-            />
+            <Image width={500} height={500} src="/copy.png" alt="Copy" />
           </button>
         </div>
         <a
