@@ -1,12 +1,9 @@
 "use client";
 
 import { type NextPage } from "next";
-import { Button } from "@nextui-org/react";
 import Head from "next/head";
-import Link from "next/link";
 import { useState } from "react";
 import SpinnablePicker from "~/componenets/picker";
-import CopyIcon from "../../public/copy.png";
 
 const one = [
   "Лига",

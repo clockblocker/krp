@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 
 interface SpinnablePickerProps {
   options: string[];
@@ -6,8 +6,6 @@ interface SpinnablePickerProps {
   setInitialIndex: (n: number) => void;
   indexChanged: (n: number) => void;
   size?: "small" | "medium" | "large";
-  // onRefChanged?: (containerRef: React.RefObject<HTMLDivElement>) => void;
-  // onRefChanged: (containerRef: React.RefObject<HTMLDivElement>) => void;
 }
 
 const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
@@ -16,9 +14,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
   setInitialIndex,
   indexChanged,
   size = "large",
-  // onRefChanged = (a: any) => null,
 }) => {
-  // const [selectedIndex, setInitialIndex] = useState(initialIndex);
   const containerRef = useRef<HTMLDivElement>(null);
   const momentumRef = useRef<number>(0);
   const touchStartRef = useRef<number | null>(null);
@@ -33,7 +29,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
 
   useEffect(() => {
     indexChanged(initialIndex);
-  }, [initialIndex]);
+  }, [initialIndex, indexChanged]);
 
   // useEffect(() => {
   //   onRefChanged(containerRef);
