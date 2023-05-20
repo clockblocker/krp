@@ -99,7 +99,7 @@ const Home: NextPage = () => {
         />
         <meta
           name="twitter:image"
-          content="https://drive.google.com/file/d/1g69KATv4OJjnxff73TGzhI6-WXZosq-a/view?usp=share_link"
+          content="https://drive.google.com/file/d/1g69KATv4OJjnxff73TGzhI6-WXZosq-a/view"
         />
         <meta
           name="description"
