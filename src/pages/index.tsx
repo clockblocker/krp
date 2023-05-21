@@ -134,10 +134,10 @@ const Home: NextPage = () => {
         <div className="flex flex-col">
           <h3 className="text-center text-3xl font-bold">{`${
             one[initialOne] ?? ""
-          }`}</h3>
+          } ${two[initialTwo] ?? ""}`}</h3>
           <h3 className="text-center text-3xl font-bold">{`${
-            two[initialTwo] ?? ""
-          } ${three[initialThree] ?? ""}`}</h3>
+            three[initialThree] ?? ""
+          }`}</h3>
         </div>
         <br></br>
         <div className="flex">
