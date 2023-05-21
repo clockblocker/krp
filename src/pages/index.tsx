@@ -70,17 +70,17 @@ function getRandomInt(max: number, toAvoid?: number) {
 }
 
 const suggestionPairs = [
-  ["Вы хотели сказать", "?"],
-  ["Возможно вы имели в виду", "."],
+  ["Вы хотели сказать:", "?"],
+  ["Возможно вы имели в виду:", "."],
   ["Только:", "."],
-  ["Может лучше", "?"],
+  ["Может лучше:", "?"],
 ];
 
 const makeSuggestion = (one: string, two: string, three: string) => {
   const n = getRandomInt(suggestionPairs.length);
   const a = (suggestionPairs[n] ?? [""])[0] ?? "";
   const b = (suggestionPairs[n] ?? [""])[1] ?? "";
-  return `${a} ${one} ${two} ${three}${b}`;
+  return `${a} "${one} ${two} ${three}"${b}`;
 };
 
 const Home: NextPage = () => {
