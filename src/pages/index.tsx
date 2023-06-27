@@ -85,13 +85,8 @@ const makeSuggestion = (one: string, two: string, three: string) => {
 
 const Home: NextPage = () => {
   const [initialOne, setInitialOne] = useState(2);
-  const [selectedOne, setSelectedOne] = useState(one[initialOne] || "");
-
   const [initialTwo, setInitialTwo] = useState(5);
-  const [selectedTwo, setSelectedTwo] = useState(two[initialTwo] || "");
-
   const [initialThree, setInitialThree] = useState(6);
-  const [selectedThree, setSelectedThree] = useState(three[initialThree] || "");
 
   const bound = (f: (n: number) => void, a: Array<any>) => {
     return (n: number) => {
@@ -128,13 +123,16 @@ const Home: NextPage = () => {
             патриотами
           </h1>
           <h1 className="select-none text-5xl font-extrabold tracking-tight text-[hsl(349,61%,50%)] sm:text-[5rem]">
-            кровопийц
+            людоедов
           </h1>
         </div>
         <div className="flex flex-col">
           <h3 className="text-center text-3xl font-bold">{`${
             one[initialOne] ?? ""
-          } ${two[initialTwo] ?? ""}`}</h3>
+          }`}</h3>
+          <h3 className="text-center text-3xl font-bold">{`${
+            two[initialTwo] ?? ""
+          }`}</h3>
           <h3 className="text-center text-3xl font-bold">{`${
             three[initialThree] ?? ""
           }`}</h3>
@@ -145,20 +143,17 @@ const Home: NextPage = () => {
             options={one}
             initialIndex={initialOne}
             setInitialIndex={(n: number) => bound(setInitialOne, one)(n)}
-            // indexChanged={(n) => setSelectedOne(one[n] ?? "")}
             size={"small"}
           />
           <SpinnablePicker
             options={two}
             initialIndex={initialTwo}
             setInitialIndex={(n: number) => bound(setInitialTwo, two)(n)}
-            // indexChanged={(n) => setSelectedTwo(two[n] ?? "")}
           />
           <SpinnablePicker
             options={three}
             initialIndex={initialThree}
             setInitialIndex={(n: number) => bound(setInitialThree, three)(n)}
-            // indexChanged={(n) => setSelectedThree(three[n] ?? "")}
             size={"medium"}
           />
         </div>
@@ -181,7 +176,9 @@ const Home: NextPage = () => {
             onClick={() => {
               void (async () => {
                 await navigator.clipboard.writeText(
-                  `${selectedOne} ${selectedTwo} ${selectedThree}`
+                  `${one[initialOne] ?? ""} ${two[initialTwo] ?? ""} ${
+                    three[initialThree] ?? ""
+                  }`
                 );
               })();
             }}
