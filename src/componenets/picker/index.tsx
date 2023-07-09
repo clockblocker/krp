@@ -89,6 +89,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
   };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
     touchStartRef.current = e.touches[0]?.clientY || null;
     touchMoveRef.current = touchStartRef.current;
     momentumRef.current = 0;
@@ -96,6 +97,7 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
     if (touchStartRef.current !== null && e.touches) {
       const touchMove = e.touches[0]?.clientY || 0;
       const delta = (touchMove - (touchMoveRef.current ?? 0)) / 15;
@@ -105,7 +107,8 @@ const SpinnablePicker: React.FC<SpinnablePickerProps> = ({
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.preventDefault();
     touchStartRef.current = null;
     touchMoveRef.current = null;
 

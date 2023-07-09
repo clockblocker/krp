@@ -10,6 +10,15 @@
   position: relative;
 }
 
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
 .medium-picker {
   width: 122px !important;
   margin-left: 5px;
