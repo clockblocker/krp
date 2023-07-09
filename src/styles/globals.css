@@ -5,7 +5,7 @@
   width: 125px;
   height: 200px;
   overflow: hidden;
-  /* border: 1px solid #ccc; */
+  overscroll-behavior: contain;
   border-radius: 4px;
   position: relative;
 }
